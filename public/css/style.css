@@ -1,0 +1,17 @@
+*{
+	box-sizing: border-box;
+	/* height: 100%; */
+}
+
+html, body{
+	height: 100%;
+}
+
+.header{
+	background-image: url("/images/static/header.jpg");
+	position: relative;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: 100%;
+}

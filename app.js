@@ -1,16 +1,12 @@
 var express = require('express');
-var path = require('path');
-var fs = require('fs');
-var favicon = require('serve-favicon');
-var logger = require('morgan'); // 
+var path = require('path'); 
+var fs = require('fs'); // lecture de fichiers et répertoires
+var favicon = require('serve-favicon'); // gestion des favicons
+var logger = require('morgan'); // le fichier de log 
 var cookieParser = require('cookie-parser'); // https://www.npmjs.com/package/cookie-parser
 var session = require('express-session') // https://github.com/expressjs/session
 var bodyParser = require('body-parser'); // récupération des requêtes de type POST
 
-/* LISTE des fichiers routes + controller */
-var index = require('./routes/index');
-var test = require('./routes/test');
-var users = require('./routes/users');
 
 var app = express();
 
@@ -25,11 +21,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Logging
 var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
 app.use(logger('combined', {stream: accessLogStream}))
 
+/* LISTE des fichiers routes + controller */
+var index = require('./routes/index');
 app.use('/', index);
+var test = require('./routes/test');
 app.use('/test', test);
+var users = require('./routes/users');
 app.use('/users', users);
 
 // catch 404 and forward to error handler
