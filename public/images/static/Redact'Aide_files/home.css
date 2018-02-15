@@ -1,0 +1,21 @@
+.header{
+	background-image: url("/images/static/header.jpg");
+	position: relative;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	height: 100%;
+	text-align: center;
+}
+.header h1{
+	background-color: white;
+	font-size: 2em;
+	color: #2c3e50;
+	padding: 20px;
+}
+.header #accroche{
+	margin-top: 32%;
+}
+.header #cta_header{
+	margin-top: 35%;
+}

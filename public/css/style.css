@@ -1,17 +1,37 @@
+/* GENERAL */
 *{
 	box-sizing: border-box;
+	/*display: flex;*/
 	/* height: 100%; */
 }
 
 html, body{
 	height: 100%;
+	font-size: 100%;
 }
 
-.header{
-	background-image: url("/images/static/header.jpg");
-	position: relative;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
+.p{
+	text-align: justify;
+}
+
+.hundred_height{
 	height: 100%;
+}
+.fifty_height{
+	height: 50%;
+}
+.twenty_height{
+	height: 20%;
+}
+
+
+/* NAVIGATION */
+.nav{
+}
+
+@media screen and (min-width: 992px) {
+	.navbar-nav{
+		position: absolute;
+		right: 0;
+	} 
 }
