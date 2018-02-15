@@ -8,9 +8,9 @@
 	text-align: center;
 }
 .header h1{
-	background-color: white;
-	font-size: 2em;
-	color: #2c3e50;
+	/* background-color: white; */
+	font-size: 3em;
+	color: #4b495f;
 	padding: 20px;
 }
 .header #accroche{

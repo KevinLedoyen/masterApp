@@ -29,10 +29,10 @@ app.use(logger('combined', {stream: accessLogStream}))
 /* LISTE des fichiers routes + controller */
 var index = require('./routes/index');
 app.use('/', index);
-var test = require('./routes/test');
-app.use('/test', test);
 var users = require('./routes/users');
-app.use('/users', users);
+app.use('/', users);
+// var test = require('./routes/test');
+// app.use('/', test);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

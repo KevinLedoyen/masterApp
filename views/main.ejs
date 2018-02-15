@@ -24,10 +24,12 @@
 		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 		<meta name="theme-color" content="#ffffff">
 
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 		<% if(css_files != undefined) { for (var i = 0; i < css_files.length; i++) { %>
 			<link rel="stylesheet" type="text/css" href="/css/<%= css_files[i] %>">
 		<% } } %>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap-social.css">
+		<link rel="stylesheet" type="text/css" href="/css/font-awesome.css">
 	</head>
 	</head>
 	<body>
@@ -60,7 +62,7 @@
 						<a class="nav-link " href="#">connexion</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link " href="#">inscription</a>
+						<a class="btn btn-outline-primary" href="#">inscription</a>
 					</li>
 				</ul>
 			</div>
