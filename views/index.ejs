@@ -1,23 +1,27 @@
 <div class="header">
 	<div class="container hundred_height">
-		<div class="row hundred_height align-items-center">
+		<div class="row hundred_height align-items-center justify-content-md-center">
 			<!-- <div class="col-md-12 col-lg-6" id="accroche"> -->
 			<!-- </div> -->
 			<!-- <div class="col-md-12 col-lg-6" id="cta_header"> -->
-			<div class="col card" id="cta_header">
+			<div class="col-sm-12 col-md-6 card" id="cta_header">
 				<h1>La solution de rédaction de documents universitaires</h1>
-				<div class="input-group mb-3">
-					<div class="input-group mb-3">
-						<select class="custom-select" id="inputGroupSelect01">
-							<option selected>Je dois rédiger un...</option>
-							<option value="1">mémoire</option>
-							<option value="2">rapport de stage</option>
-							<option value="3">autre...</option>
-						</select>
-						<div class="input-group-append">
-							<button class="btn btn-primary" type="button">Go !</button>
-						</div>
-					</div>
+				<div class="form-group">
+					<label for="email">Adresse email</label>
+					<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="jean.valjean@hotmail.fr">
+					<small id="emailHelp" class="form-text text-muted">Nous ne partagerons jamais ton email <a href="#">voir notre charte</a></small>
+				</div>
+				<div class="form-group">
+					<select class="custom-select" id="inputGroupSelect01">
+						<option selected>Je dois rédiger un/une...</option>
+						<option value="1">mémoire</option>
+						<option value="2">rapport de stage</option>
+						<option value="2">dissertation</option>
+						<option value="3">autre...</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary" type="button">commencer à rédiger</button>
 				</div>
 			</div>
 		</div>
