@@ -6,7 +6,7 @@ var logger = require('morgan'); // le fichier de log
 var cookieParser = require('cookie-parser'); // https://www.npmjs.com/package/cookie-parser
 var session = require('express-session') // https://github.com/expressjs/session
 var bodyParser = require('body-parser'); // récupération des requêtes de type POST
-var sequelize = require('./database/sequelize'); // base de donnée postgreSQL avec l'ORM sequelize
+// var sequelize = require('./database/sequelize'); // base de donnée postgreSQL avec l'ORM sequelize
 
 var app = express();
 
