@@ -10,6 +10,7 @@ router.get('/login', function(req, res, next) {
     	res.render('main', { path : 'users/login', css_files: css_files, js_files:js_files, title: title});
 });
 
+
 router.get('/logout', function(req, res, next) {
 		console.log('page logout');
 		var title = "Redact'Aide";

@@ -8,7 +8,6 @@
 // firebase.auth().currentUser.uid
 //Creates a new post for the current user.
 
-
 function newPostForCurrentUser(title, text) {
 var userId = firebase.auth().currentUser.uid;
 	return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
@@ -35,31 +34,31 @@ function writeNewPost(uid, username, picture, title, body) {
 
 	// Write the new post's data simultaneously in the posts list and the user's post list.
 	var updates = {};
-	updates['/posts/' + newPostKey] = postData;
-	updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+	updates['/documents/' + newPostKey] = postData;
+	updates['/user-documents/' + uid + '/' + newPostKey] = postData;
 
 	return firebase.database().ref().update(updates);
 }
 
 window.addEventListener('load', function() {
-	firebase.auth().onAuthStateChanged(onAuthStateChanged);
+	firebase.auth().onAuthStateChanged(onAuthStatCehanged);
 });
 
 /**
  * Triggers every time there is a change in the Firebase auth state (i.e. user signed-in or user signed out).
  */
 function onAuthStateChanged(user) {
-  // We ignore token refresh events.
-  if (user && currentUID === user.uid) {
-    return;
-  }
-  if (user) {
-    currentUID = user.uid;
-    console.log(user);
-    // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
-    // startDatabaseQueries();
-  } else {
-    // Set currentUID to null.
-    currentUID = null;
-  }
+	// We ignore token refresh events.
+	if (user && currentUID === user.uid) {
+		return;
+	}
+	if (user) {
+		currentUID = user.uid;
+		console.log(user);
+	    // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
+	    // startDatabaseQueries();
+	} else {
+	    // Set currentUID to null.
+	    currentUID = null;
+	}
 }
