@@ -23,8 +23,8 @@ router.get('/redaction', function(req, res, next) {
 		console.log('page editeur');
 		var title = "Redact'Aide";
 		var css_files = ['style.css', 'hoverable.css', 'color.css', 'users/main.css']; // rajouter des fichiers css
-		var js_files = ['app.js']; // rajouter des fichiers js
-		var js_head_files = ['editeur.js']; // rajouter des fichiers js
+		var js_files = ['app.js', 'editeur.js']; // rajouter des fichiers js
+		var js_head_files = []; // rajouter des fichiers js
 	  	res.render('userBackoffice', { path : 'users/editeur', css_files: css_files, js_files:js_files, js_head_files:js_head_files, title: title});
 });
 

@@ -4,6 +4,7 @@ var user;
 
 window.addEventListener('load', function() {
 	updateMenu();
+    
 });
 function updateMenu(){
 	var connected = getCookie("connected");

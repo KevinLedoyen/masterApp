@@ -7,42 +7,115 @@
 // récupération de l'uid de l'utilisateur en cours
 // firebase.auth().currentUser.uid
 //Creates a new post for the current user.
+var current_user_documents = [];
+console.log('update document');
+function update_documents(){
+	uid = firebase.auth().currentUser.uid;
+	var Documents = firebase.database().ref('user-documents/' + uid);
+	Documents.on('value', function (r) {
+	    $('#liens_documents').html('Loading...');
+	    var html = '';
+	    r.forEach(function (item) {
+	        console.log(item);
+	        console.log(item.key);
+	        // item.child("name").val()
+	        current_user_documents[item.key] = item.val();
+	        html += "<li><a href='#' class='lien_document' data-lien_document='"+item.key+"'>"+item.child("titre").val()+"</a></li>"
+	        // html = '<div class="col-md-4">' +
+	        //     '<a href="entry.html?id=' + item.getKey() + '" style="text-decoration:none!important;">' +
+	        //     '<div class="panel panel-info">' +
+	        //     '<div class="panel-heading">' +
+	        //     '<h3 class="panel-title">' + excerpt(entry.title, 140) + '</h3>' +
+	        //     '</div>' +
+	        //     '<div class="panel-body">' +
+	        //     '<small>By ' + entry.author + ' | ' + datetimeFormat(entry.updatedAt) + ' | ' + entry.views + ' views</small>' +
+	        //     '<hr><p>' + excerpt(entry.content, 250) + '</p>' +
+	        //     '</div>' +
+	        //     '</div>' +
+	        //     '</a>' +
+	        //     '</div>' + html; // prepend the entry because we need to display it in reverse order
+	    });
 
-function newPostForCurrentUser(title, text) {
-var userId = firebase.auth().currentUser.uid;
-	return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
-		var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-		return writeNewPost(firebase.auth().currentUser.uid, username,
-			firebase.auth().currentUser.photoURL,
-			title, text);
+	    $('#liens_documents').html(html);
+	    update_triggers();
+	});
+}
+
+
+window.addEventListener('load', function() {
+	firebase.auth().onAuthStateChanged(onAuthStateChanged);
 });
 
+
+// document.getElementById("newPostForCurrentUser").addEventListener ("click", newPostForCurrentUser, false);
+jQuery(document).ready(function($) {
+	$('#newPostForCurrentUser').on('click', function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		console.log('test');
+		newPostForCurrentUser();
+	});
+});
+
+function update_triggers(){
+	$('.lien_document').on('click', function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		console.log(this);
+		var key = $(this).data('lien_document');
+		console.log(key);
+		console.log(current_user_documents[key]);
+		// changement d'id du bouton de submission
+
+	});
+}
+
+function newPostForCurrentUser(){
+	var titre = $("#newPost input[name=titre]" ).val();
+	var ckeditor_content = $("#newPost textarea#ckeditor_content").val();
+	var userId = firebase.auth().currentUser.uid;
+	// console.log(titre, ckeditor_content, userId);
+	// if (titre != "" & ckeditor_content != "") {}
+	// Récupération du nom de l'auteur pour l'enregistrement en base
+	return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+		var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+		console.log(username);
+		console.log(firebase.auth().currentUser.uid);
+		console.log(firebase.auth().currentUser.photoURL);
+		console.log(titre);
+		console.log(ckeditor_content);
+		return writeNewPost(firebase.auth().currentUser.uid,
+			username,
+			firebase.auth().currentUser.photoURL,
+			titre,
+			ckeditor_content);
+	});
+};
+
 //Saves a new post to the Firebase DB.
-function writeNewPost(uid, username, picture, title, body) {
-	// A post entry.
-	var postData = {
+function writeNewPost(uid, username, picture, titre, ckeditor_content) {
+	// Un nouveau document
+	console.log('Nouveau document');
+	var docData = {
 		author: username,
 		uid: uid,
-		body: body,
-		title: title,
+		titre: titre,
+		content: ckeditor_content,
 		starCount: 0,
 		authorPic: picture
 	};
 
-	// Get a key for a new Post.
-	var newPostKey = firebase.database().ref().child('posts').push().key;
+	// Récupération d'une nouvelle clé pour un nouveau document
+	var newPostKey = firebase.database().ref().child('documents').push().key;
 
 	// Write the new post's data simultaneously in the posts list and the user's post list.
+	// Ecriture d'un nouveau document à la fois dans /documents et dans user-document
 	var updates = {};
-	updates['/documents/' + newPostKey] = postData;
-	updates['/user-documents/' + uid + '/' + newPostKey] = postData;
+	updates['/documents/' + newPostKey] = docData;
+	updates['/user-documents/' + uid + '/' + newPostKey] = docData;
 
 	return firebase.database().ref().update(updates);
 }
-
-window.addEventListener('load', function() {
-	firebase.auth().onAuthStateChanged(onAuthStatCehanged);
-});
 
 /**
  * Triggers every time there is a change in the Firebase auth state (i.e. user signed-in or user signed out).
@@ -53,12 +126,16 @@ function onAuthStateChanged(user) {
 		return;
 	}
 	if (user) {
+		console.log('onAuthStateChanged');
 		currentUID = user.uid;
+		update_documents();
 		console.log(user);
 	    // writeUserData(user.uid, user.displayName, user.email, user.photoURL);
 	    // startDatabaseQueries();
 	} else {
+		console.log('onAuthStateChanged');
 	    // Set currentUID to null.
 	    currentUID = null;
 	}
 }
+
