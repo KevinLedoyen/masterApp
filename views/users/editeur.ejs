@@ -9,6 +9,7 @@
 					<h4>documents</h4>
 					<ul id="liens_documents">
 					</ul>
+					<a href="#" id="createNewPostForCurrentUser">Nouveau document</a>
 				</div>
 			</div>
 		</div>
@@ -21,6 +22,7 @@
 								<!-- <h2><label for="Input title">Titre de la partie</label></h2> -->
 								<input type="text" name="titre" value="Nouveau document" class="form-control" id="Input title" placeholder="titre du document">
 							</fieldset>
+							<input type="hidden" name="uid" value="">
 							<hr>
 							<!-- <h2><label for="ckeditor_content">Document Editor</label></h2> -->
 							<textarea id="ckeditor_content" style="display: none;">
@@ -63,6 +65,7 @@
 							</textarea>
 							<br>
 							<button id="newPostForCurrentUser" class="btn btn-primary">Enregistrer</button>
+							<button id="updatePostForCurrentUser" class="btn btn-primary" style="display: none;">Mettre à jour</button>
 						<!-- </form> -->
 					</div>
 				</div>
