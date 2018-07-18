@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<title><%= title %></title>
+		<!-- FAVICON -->
+		<link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+		<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+		<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+		<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="manifest" href="/manifest.json">
+		<meta name="msapplication-TileColor" content="#ffffff">
+		<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+		<meta name="theme-color" content="#ffffff">
+
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+		<% if(typeof css_files !== 'undefined') { for (var i = 0; i < css_files.length; i++) { %>
+			<link rel="stylesheet" type="text/css" href="/css/<%= css_files[i] %>">
+		<% } } %>
+		<% if(typeof js_head_files !== 'undefined') { for (var i = 0; i < js_head_files.length; i++) { %>
+			<script src="/js/<%= js_head_files[i] %>"></script>
+		<% } } %>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap-social.css">
+		<link rel="stylesheet" type="text/css" href="/css/font-awesome.css">
+		<script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+		<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+	</head>
+	</head>
+	<body>
+		<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="/">Rédact'Aide</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#default-menu-unconnected" aria-controls="default-menu-unconnected" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="default-menu-unconnected">
+				<ul id="menu" class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<!-- <li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Documents
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							<a class="dropdown-item" href="#">Mémoire</a>
+							<a class="dropdown-item" href="#">Rapports de stage</a>
+							<a class="dropdown-item" href="#">Exposés</a>
+							<a class="dropdown-item" href="#">Autre...</a>
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Tarifs</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Blog</a>
+					</li> -->
+
+					<li class="nav-item">
+						<a class="nav-link" href="/login">connexion / inscription</a>
+					</li>
+					<!-- <li class="nav-item">
+						<a class="btn btn-outline-primary" href="#">inscription</a>
+					</li> -->
+				</ul>
+			</div>
+		</nav>
+		<%- include(path) %>
+		<footer class="fifty_height deep-purple text-white">
+			<div class="container hundred_height">
+				<div class="row hundred_height align-items-center">
+					<div class="col">
+						<ul>
+							<li>FAQ</li>
+							<li>Notre histoire</li>
+							<li>notre équipe</li>
+						</ul>
+					</div>
+					<div class="col">
+						<ul>
+							<li>Recrutement</li>
+							<li>mentions légales</li>
+							<li>Plan du site</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.1.0/firebase-database.js"></script>
+<script>
+	// Initialize Firebase
+	var config = {
+		apiKey: "AIzaSyBG_u2TxhHHKbx5Lsm16baAGr-_AJp4VS0",
+		authDomain: "redactaide.firebaseapp.com",
+		databaseURL: "https://redactaide.firebaseio.com",
+		projectId: "redactaide",
+		storageBucket: "redactaide.appspot.com",
+		messagingSenderId: "637460892981"
+	};
+	firebase.initializeApp(config);
+
+	// Get a reference to the database service
+	var database = firebase.database();
+
+	/* FONCTIONS DE REFERENCES EXEMPLES */
+	// firebase.database().ref('users/kevinLedoyen').set({
+	// 	username: "test",
+	// 	email: "test@gmail.com"
+	// });
+
+	// récupération de l'uid de l'utilisateur en cours
+	// firebase.auth().currentUser.uid
+	/**
+	 * Creates a new post for the current user.
+	 
+	 function newPostForCurrentUser(title, text) {
+	  // [START single_value_read]
+	  var userId = firebase.auth().currentUser.uid;
+	  return firebase.database().ref('/users/' + userId).once('value').then(function(snapshot) {
+	  	var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+		// [START_EXCLUDE]
+		return writeNewPost(firebase.auth().currentUser.uid, username,
+			firebase.auth().currentUser.photoURL,
+			title, text);
+		// [END_EXCLUDE]
+	});*/
+	  // [END single_value_read]
+
+	  /**
+	   * Saves a new post to the Firebase DB.
+	   
+	  // [START write_fan_out]
+	  function writeNewPost(uid, username, picture, title, body) {
+		// A post entry.
+		var postData = {
+			author: username,
+			uid: uid,
+			body: body,
+			title: title,
+			starCount: 0,
+			authorPic: picture
+		};
+
+		// Get a key for a new Post.
+		var newPostKey = firebase.database().ref().child('posts').push().key;
+
+		// Write the new post's data simultaneously in the posts list and the user's post list.
+		var updates = {};
+		updates['/posts/' + newPostKey] = postData;
+		updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+
+		return firebase.database().ref().update(updates);
+	}*/
+	  // [END write_fan_out]
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<% if(typeof js_files !== 'undefined') { for (var i = 0; i < js_files.length; i++) { %>
+	<script src="/js/<%= js_files[i] %>"></script>
+<% } } %>
